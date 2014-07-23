@@ -1,0 +1,132 @@
+html,body {
+	height: 100%;
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+}
+div#container2 {
+	display: none;
+}
+core-header-panel {
+	height: 100%;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	text-align: center;
+}
+core-toolbar {
+	background: #03a9f4;
+	color: white;
+}
+core-field {
+    border: 1px solid #ddd;
+    margin: 10px;
+    height: 40px;
+}
+core-field {
+	width:80%;
+	float: left;
+}
+paper-input {
+	width: 36%;
+}
+p {
+	margin: 15px;
+}
+p.friendid {
+	float: left;
+	line-height: 33px;
+}
+p.myid {
+	float: right;
+	line-height: 33px;
+}
+p.myChat {
+	background-color: #4285f4;
+	color: white;
+	padding: 5px;
+	margin: 2.5px 5px;
+}
+p.friendChat {
+	background-color: #0f9d58;
+	color: white;
+	padding: 5px;
+	margin: 2.5px 5px;
+}
+p.chatHead {
+	margin: 5px;
+}
+#container {
+	text-align: center;
+	width: 75%;
+	margin: auto;
+	background-color: white;
+	padding: 25px;
+}
+#setWidth {
+	display: inline-block;
+
+}
+#tabs {
+	width: 100%;
+	margin: 0;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+#subTitle {
+	text-align: center;
+	float: left;
+	line-height: 33px;
+	margin-left: 0;
+}
+#chat_area {
+	margin:20px;
+	text-align: left;
+}
+#messages {
+	overflow: scroll;
+	height: 150px;
+	border: solid #E5E5E5;
+}
+#localVideo {
+	position:relative;
+}
+.align {
+	text-align: left;
+	/*width:50%;*/
+	/*margin:auto;*/
+}
+.white {
+	background-color:white;
+	width: 75%;
+	margin: auto;
+	padding: 20px;
+}
+paper-button[raisedButton].colored {
+  background: #4285f4;
+  color: #fff;
+  top:10px;
+}
+
+paper-button.colored.send{
+	top:12.5px;
+}
+
+paper-button[raisedButton].colored #ripple,
+paper-button[raisedButton].colored::shadow #ripple {
+  color: #2a56c6;
+}
+
+paper-button[raisedButton].colored #focusBg,
+paper-button[raisedButton].colored::shadow #focusBg {
+  background: #3367d6;
+}
+.videoContainer{
+	margin-top:10px;
+}
+@media (min-width: 481px) {
+    #tabs {
+      width: 200px;
+    }
+ }

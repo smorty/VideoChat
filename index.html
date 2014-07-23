@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>WebRTC client</title>
+    <meta name="viewport" charset="utf-8" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <script src="bower_components/platform/platform.js"></script>
+    <link rel="import" href="bower_components/font-roboto/roboto.html">
+    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/core-field/core-field.html">
+    <link rel="stylesheet" href="styles/style.css" />
+
+</head>
+
+<body unresolved touch-action="auto">
+
+  <core-header-panel>
+    
+    <core-toolbar>
+      <paper-tabs id="tabs" valueattr="name" selected="all" self-end>
+        <paper-tab name="HOME" id="home">HOME</paper-tab>
+        <paper-tab name="CHAT" id="chat">CHAT</paper-tab>
+      </paper-tabs>
+    </core-toolbar>
+
+    <div id='container'>
+      <div id='setWidth'>
+
+      <div class="align">
+        <p id="subTitle"></p>
+        <paper-input floatingLabel label="Create Room" id="sessionInput" class="room"></paper-input>
+        <!-- <input id="sessionInput" class="room"/> -->
+        <paper-button raisedButton class="colored room" label="Create" id="create"></paper-button>
+        <p class="myid">MY ID: <span id="pid"></span></p>
+      </div>
+
+      <div class="allvideos">
+
+        <div class="videoContainer">
+          <video id="localVideo" oncontextmenu="return false;"></video>
+          <div id="localVolume" class="volume_bar"></div>
+        </div>
+
+        <div id="remotes"></div>
+
+      </div>
+
+      <div class="align" id="chatConnect">
+        <!-- <p>MY ID: <span id="pid"></span></p> -->
+        <!-- Connect to peer: <input type="text" id="rid" placeholder="Someone else's id"> -->
+        <p class="friendid">USE A FRIEND'S ID TO CHAT: </p> 
+        <paper-input floatingLabel label="Friend's ID" id="rid" class="rid"></paper-input>
+        <paper-button raisedButton class="colored" label="Connect" id="connect"></paper-button>
+      </div>
+      
+      <div id="chat_area" style="display: none;">
+        <div id="messages"></div>
+        <core-field>
+          <input placeholder="Enter message" id="text" if="text" flex>
+        </core-field>
+        <paper-button raisedButton class="colored send" label="Send" id="send"></paper-button>
+        <!-- <input type="text" id="text" placeholder="Enter message">
+        <input type="button" value="Send" id="send"> -->
+      </div>
+      </div>
+    </div>
+
+    <div id="container2">
+      <div class="white">
+        <h1>XOXO put a bird on it pickled meh American Apparel Pinterest Austin freegan, cliche PBR</h1>
+
+        <p>XOXO put a bird on it pickled meh American Apparel Pinterest Austin freegan, cliche PBR. Thundercats swag keytar fanny pack raw denim, hashtag aesthetic +1. Organic quinoa street art tattooed, farm-to-table Carles lomo. Craft beer kogi butcher sartorial. Wayfarers mlkshk synth seitan. Food truck selfies Wes Anderson, vinyl disrupt retro Pinterest pour-over Truffaut Etsy Brooklyn street art hashtag tote bag blog. Biodiesel kitsch asymmetrical, farm-to-table chia gentrify synth normcore blog yr Carles Bushwick kale chips Williamsburg.</p>
+
+        <p>Fanny pack flannel four loko drinking vinegar, 3 wolf moon pop-up single-origin coffee art party actually plaid Shoreditch sriracha tofu. Readymade flannel High Life, whatever gluten-free Vice direct trade banjo Pitchfork. Farm-to-table flannel polaroid before they sold out semiotics. IPhone quinoa master cleanse, blog meggings jean shorts bitters photo booth chambray gastropub fashion axe locavore Pinterest gentrify. Disrupt deep v hella Williamsburg keffiyeh, fanny pack Schlitz fashion axe drinking vinegar. Farm-to-table gluten-free tousled, photo booth vegan chambray Pinterest Cosby sweater artisan Odd Future ugh aesthetic. Forage beard PBR&B, dreamcatcher flannel next level Godard +1 shabby chic pickled flexitarian chillwave ennui authentic tousled.</p>
+
+        <p>Locavore narwhal photo booth, pour-over skateboard sriracha selvage try-hard fingerstache Banksy quinoa. Intelligentsia skateboard food truck literally. Authentic 90's swag Etsy sriracha, plaid blog pork belly cray tousled banh mi Pitchfork. Cliche literally banh mi Etsy Echo Park 8-bit. Farm-to-table Schlitz 90's squid jean shorts +1, Wes Anderson art party. DIY shabby chic occupy readymade plaid, chambray mlkshk. Narwhal tofu forage Portland viral, iPhone vinyl lo-fi hella kogi Williamsburg 8-bit direct trade.</p>
+
+        <p>YOLO drinking vinegar gluten-free ugh, cornhole McSweeney's Schlitz meggings banh mi chillwave mustache American Apparel Austin squid art party. Messenger bag Vice mustache, wolf farm-to-table lomo Schlitz before they sold out. Messenger bag kale chips lo-fi semiotics, slow-carb readymade next level. Godard Cosby sweater tofu, authentic kitsch hoodie roof party ethnic McSweeney's normcore iPhone artisan. Normcore locavore dreamcatcher, cardigan wolf retro Marfa post-ironic 3 wolf moon food truck. Banksy Echo Park lo-fi sartorial, art party pop-up gluten-free tofu mustache four loko Schlitz before they sold out mixtape. Direct trade pork belly normcore, stumptown gluten-free disrupt +1 meh Schlitz yr blog Austin Williamsburg 8-bit art party.</p>
+      </div>
+    </div>
+
+  </core-header-panel>
+
+  <!-- <script src="bower_components/platform/platform.js"></script> -->
+  <script>
+  window.addEventListener('polymer-ready', function(e) {
+    console.log('Polymer ready!');
+    //right here, maybe have functions that will kick off chat and video
+  })
+  </script>
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script> 
+  <script type="text/javascript" src="peer.js"></script>
+  <!-- <script type="text/javascript" src="http://cdn.peerjs.com/0/peer.js"></script> -->
+  <script src="simplewebrtc.bundle.js"></script>
+  <script src='js/lib/adapter.js'></script>
+  <script src='js/video.js'></script>
+  <script src='js/chat.js'></script>
+  <script src='js/ui.js'></script>
+
+  </body>
+</html>
