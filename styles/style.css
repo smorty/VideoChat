@@ -23,7 +23,7 @@ core-field {
     height: 40px;
 }
 core-field {
-	width:80%;
+	width:85%;
 	float: left;
 }
 paper-input {
@@ -35,20 +35,21 @@ p {
 p.friendid {
 	float: left;
 	line-height: 33px;
+	margin: 15px 10px 15px 0;
 }
 p.myid {
 	float: right;
 	line-height: 33px;
 }
-p.myChat {
-	background-color: #4285f4;
-	color: white;
+.myChat {
+	color: #4285f4;
+/*	color: white;*/
 	padding: 5px;
 	margin: 2.5px 5px;
 }
-p.friendChat {
-	background-color: #0f9d58;
-	color: white;
+.friendChat {
+	color: #0f9d58;
+	/*color: white;*/
 	padding: 5px;
 	margin: 2.5px 5px;
 }
@@ -56,7 +57,7 @@ p.chatHead {
 	margin: 5px;
 }
 #container {
-	text-align: center;
+	/*text-align: center;*/
 	width: 75%;
 	margin: auto;
 	background-color: white;
@@ -91,6 +92,7 @@ p.chatHead {
 }
 #localVideo {
 	position:relative;
+	display: inline;
 }
 .align {
 	text-align: left;
@@ -102,6 +104,9 @@ p.chatHead {
 	width: 75%;
 	margin: auto;
 	padding: 20px;
+}
+.allvideos {
+	position: relative;
 }
 paper-button[raisedButton].colored {
   background: #4285f4;

@@ -5078,6 +5078,7 @@ WebRTC.prototype.sendDirectlyToAll = function (channel, message, payload) {
     this.peers.forEach(function (peer) {
         if (peer.enableDataChannels) {
             peer.sendDirectly(channel, message, payload);
+            console.log(channel, message, payload);
         }
     });
 };

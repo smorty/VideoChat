@@ -29,14 +29,13 @@
 
     <div id='container'>
       <div id='setWidth'>
-
-      <div class="align">
-        <p id="subTitle"></p>
-        <paper-input floatingLabel label="Create Room" id="sessionInput" class="room"></paper-input>
-        <!-- <input id="sessionInput" class="room"/> -->
-        <paper-button raisedButton class="colored room" label="Create" id="create"></paper-button>
-        <p class="myid">MY ID: <span id="pid"></span></p>
-      </div>
+        <div class='align'>
+          <p id="subTitle"></p>
+          <paper-input floatingLabel label="Create Room" id="sessionInput" class="room"></paper-input>
+          <!-- <input id="sessionInput" class="room"/> -->
+          <paper-button raisedButton class="colored room" label="Create" id="create"></paper-button>
+          <!-- <p class="myid">MY ID: <span id="pid"></span></p> -->
+        </div>
 
       <div class="allvideos">
 
@@ -49,15 +48,19 @@
 
       </div>
 
-      <div class="align" id="chatConnect">
+<!--       <input type="text" placeholder="test" id="testText">
+      <input type="button" id="testSend"> -->
+
+      <div class="align" id="selectName" style="display:none;">
         <!-- <p>MY ID: <span id="pid"></span></p> -->
         <!-- Connect to peer: <input type="text" id="rid" placeholder="Someone else's id"> -->
-        <p class="friendid">USE A FRIEND'S ID TO CHAT: </p> 
-        <paper-input floatingLabel label="Friend's ID" id="rid" class="rid"></paper-input>
+        <p class="friendid">Choose a username: </p> 
+        <paper-input floatingLabel label="Username" id="rid" class="rid"></paper-input>
         <paper-button raisedButton class="colored" label="Connect" id="connect"></paper-button>
       </div>
       
       <div id="chat_area" style="display: none;">
+      <!-- <div id="chat_area"> -->
         <div id="messages"></div>
         <core-field>
           <input placeholder="Enter message" id="text" if="text" flex>
@@ -90,15 +93,14 @@
   window.addEventListener('polymer-ready', function(e) {
     console.log('Polymer ready!');
     //right here, maybe have functions that will kick off chat and video
+    video();
+    // chat();
   })
   </script>
   <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script> 
-  <script type="text/javascript" src="peer.js"></script>
-  <!-- <script type="text/javascript" src="http://cdn.peerjs.com/0/peer.js"></script> -->
   <script src="simplewebrtc.bundle.js"></script>
   <script src='js/lib/adapter.js'></script>
   <script src='js/video.js'></script>
-  <script src='js/chat.js'></script>
   <script src='js/ui.js'></script>
 
   </body>

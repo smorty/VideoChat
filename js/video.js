@@ -1,9 +1,11 @@
+function video(){
 // grab the room from the URL
 var room = location.search && location.search.split('?')[1];
 
 // This object will take in an array of XirSys STUN / TURN servers
 // and override the original peerConnectionConfig object
 var peerConnectionConfig;
+var username;
  
 $.ajax({
     type: "POST",
@@ -58,6 +60,15 @@ function showVolume(el, volume) {
 webrtc.on('channelMessage', function (peer, label, data) {
     if (data.type == 'volume') {
         showVolume(document.getElementById('volume_' + peer.id), data.volume);
+    } else if (data.type == 'name') {
+        username = data.payload;
+    } else if (data.type == 'chat') {
+        $('#messages').append('<p><span class="friendChat"><strong>' + username + ': </strong></span>' + data.payload + '</p>');
+        $("#messages").scrollTop($("#messages")[0].scrollHeight);
+        // console.log('Received message: ' + data.payload + ' from ' + username);
+        webrtc.sendDirectlyToAll("test chat", "log", "Message received on other end:" + data.payload);
+    } else if (data.type == 'log') {
+        console.log(data.payload);
     }
 });
 webrtc.on('videoAdded', function (video, peer) {
@@ -77,8 +88,10 @@ webrtc.on('videoAdded', function (video, peer) {
         };
         d.appendChild(vol);
         remotes.appendChild(d);
-        $('#localVideo').animate({height: '100px', width: '100%', top: '5.5rem', left: '-10.8rem'});
+        $('#localVideo').animate({height: '100px', top: '53px', left: '0'});
         $('#localVideo').css("position", "absolute");
+        $('#selectName').show();
+        webrtc.sendDirectlyToAll("test chat", "chat", "test msg");
     }
 });
 webrtc.on('videoRemoved', function (video, peer) {
@@ -107,6 +120,7 @@ if (room) {
     setRoom(room);
 } else {
     $('#create').click(function () {
+        debugger;
         var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
         webrtc.createRoom(val, function (err, name) {
             console.log(' create room cb', arguments);
@@ -117,9 +131,29 @@ if (room) {
                 setRoom(name);
             } else {
                 console.log(err);
+                alert(err);
             }
         });
         return false;          
+    });
+    $('#sessionInput').keypress(function(e){
+      if(e.which == 13){
+        $('#sessionInput').blur();
+        var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
+        webrtc.createRoom(val, function (err, name) {
+            console.log(' create room cb', arguments);
+        
+            var newUrl = location.pathname + '?' + name;
+            if (!err) {
+                history.replaceState({foo: 'bar'}, null, newUrl);
+                setRoom(name);
+            } else {
+                console.log(err);
+                alert(err);
+            }
+        });
+        return false;
+      };
     });
 }
 
@@ -147,4 +181,48 @@ button.click(function () {
         });
         
     }
+})
+
+
+var send = $('#send');
+// var chatText = $('#testText').val();
+send.click(function(){
+    var msg = $('#text').val();
+    webrtc.sendDirectlyToAll("test chat", "chat", msg);
+    $('#messages').append('<p><span class="myChat"><strong>You: </strong></span>' + msg + '</p>');
+    $("#messages").scrollTop($("#messages")[0].scrollHeight);
+    $('#text').val('');
+    $('#text').focus();
+})
+
+$('#text').keypress(function(e){
+    if(e.which == 13){
+        $('#text').blur();
+        var msg = $('#text').val();
+        webrtc.sendDirectlyToAll("test chat", "chat", msg);
+        $('#messages').append('<p><span class="myChat"><strong>You: </strong></span>' + msg + '</p>');
+        $("#messages").scrollTop($("#messages")[0].scrollHeight);
+        $('#text').val('');
+        $('#text').focus();
+    }
+})
+
+$('#connect').click(function(){
+    var sn = $('#rid').val();
+    webrtc.sendDirectlyToAll("test chat", "name", sn);
+    $('#chat_area').show();
+    $('#selectName').hide();
+    $('#messages').append('<p>Your username is: <strong>' + sn + '</strong></p>');
+})
+$('#rid').keypress(function(e){
+    if(e.which == 13){
+        $('#rid').blur();
+        var sn = $('#rid').val();
+        webrtc.sendDirectlyToAll("test chat", "name", sn);
+        $('#chat_area').show();
+        $('#selectName').hide();
+        $('#messages').append('<p>Your username is: <strong>' + sn + '</strong></p>');
+    }
 });
+
+};
